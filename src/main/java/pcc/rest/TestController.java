@@ -1,5 +1,7 @@
 package pcc.rest;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,19 @@ import pcc.repository.IssuerRepository;
 @RequestMapping("/test")
 public class TestController {
 
+	
+	@PostConstruct
+	public void init() {
+		Issuer issuer1 = new Issuer(); 
+		issuer1.setPan("123456789");
+		issuer1.setUrl("localhost:8087");
+		issuerRepository.save(issuer1); 
+		
+		Issuer issuer2 = new Issuer(); 
+		issuer2.setPan("333333333333333333");
+		issuer2.setUrl("localhost:8088");
+		issuerRepository.save(issuer2); 
+	}
 	@Autowired
 	private IssuerRepository issuerRepository; 
 

@@ -35,7 +35,8 @@ public class PCCController {
 	@Autowired
 	private IssuerRepository issuerRepository;
 
-	private RestTemplate rt = new RestTemplate();
+	@Autowired
+	private RestTemplate rt;
 
 	private final Log logger = LogFactory.getLog(this.getClass());
 
@@ -44,7 +45,7 @@ public class PCCController {
 
 		Issuer issuer = issuerRepository.findByPan(completePaymentDTO.getPan());
 
-		String url = "http://" + issuer.getUrl() + "/issuerMain/completePaymentRequest";
+		String url = "https://" + issuer.getUrl() + "/issuerMain/completePaymentRequest";
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
